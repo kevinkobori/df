@@ -2,17 +2,16 @@
 <div class="header-container">
   <header class="the-header">
     <TheSideNavToggle @toggle="$emit('sidenavToggle')" />
-    <div class="logo">
-      <nuxt-link to="/">WD BLOG</nuxt-link>
+    <div class="title">
+      <nuxt-link to="/">Medicaiton Stock</nuxt-link>
     </div>
     <div class="spacer"></div>
-    <div class="navigation-items">
+    <!-- <div class="navigation-items">
       <ul class="nav-list">
-        <li class="nav-item"><nuxt-link to="/posts">Blog</nuxt-link></li>
-        <li class="nav-item"><nuxt-link to="/about">About</nuxt-link></li>
-        <li class="nav-item"><nuxt-link to="/admin">Admin</nuxt-link></li>
+        <li class="nav-item"><nuxt-link to="/medications">Medications</nuxt-link></li>
+        <li class="nav-item"><nuxt-link to="/history">History</nuxt-link></li>
       </ul>
-    </div>
+    </div> -->
   </header>
 </div>
 </template>
@@ -41,20 +40,20 @@ export default {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  background-color: black;
+  background-color: white;
   z-index: 100;
   box-sizing: border-box;
   padding: 0 20px;
 }
 
-.logo {
+.title {
   margin: 0 10px;
   font-size: 1.3rem;
 }
 
-.logo a {
+.title a {
   text-decoration: none;
-  color: white;
+  color: black;
 }
 
 .spacer {
@@ -84,7 +83,7 @@ export default {
 
 .nav-item a {
   text-decoration: none;
-  color: white;
+  color: black;
 }
 
 .nav-item a:hover,

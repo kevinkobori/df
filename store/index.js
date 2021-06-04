@@ -4,21 +4,21 @@ import Cookie from "js-cookie";
 const createStore = () => {
   return new Vuex.Store({
     state: {
-      loadedPosts: [],
+      loadedMedications: [],
       token: null
     },
     mutations: {
-      setPosts(state, posts) {
-        state.loadedPosts = posts;
+      setMedications(state, medications) {
+        state.loadedMedications = medications;
       },
-      addPost(state, post) {
-        state.loadedPosts.push(post);
+      addMedication(state, medication) {
+        state.loadedMedications.push(medication);
       },
-      editPost(state, editedPost) {
-        const postIndex = state.loadedPosts.findIndex(
-          post => post.id === editedPost.id
+      editMedication(state, editedMedication) {
+        const medicationIndex = state.loadedMedications.findIndex(
+          medication => medication.id === editedMedication.id
         );
-        state.loadedPosts[postIndex] = editedPost;
+        state.loadedMedications[medicationIndex] = editedMedication;
       },
       setToken(state, token) {
         state.token = token;
@@ -30,48 +30,48 @@ const createStore = () => {
     actions: {
       nuxtServerInit(vuexContext, context) {
         return context.app.$axios
-          .$get("/posts.json")
+          .$get("/medications.json")
           .then(data => {
-            const postsArray = [];
+            const medicationsArray = [];
             for (const key in data) {
-              postsArray.push({ ...data[key], id: key });
+              medicationsArray.push({ ...data[key], id: key });
             }
-            vuexContext.commit("setPosts", postsArray);
+            vuexContext.commit("setMedications", medicationsArray);
           })
           .catch(e => context.error(e));
       },
-      addPost(vuexContext, post) {
-        const createdPost = {
-          ...post,
+      addMedication(vuexContext, medication) {
+        const createdMedication = {
+          ...medication,
           updatedDate: new Date()
         };
         return this.$axios
           .$post(
-            "https://challenge-philips-selecionar-default-rtdb.firebaseio.com/posts.json?auth=" +
+            "https://challenge-philips-selecionar-default-rtdb.firebaseio.com/medications.json?auth=" +
               vuexContext.state.token,
-            createdPost
+            createdMedication
           )
           .then(data => {
-            vuexContext.commit("addPost", { ...createdPost, id: data.name });
+            vuexContext.commit("addMedication", { ...createdMedication, id: data.name });
           })
           .catch(e => console.log(e));
       },
-      editPost(vuexContext, editedPost) {
+      editMedication(vuexContext, editedMedication) {
         return this.$axios
           .$put(
-            "https://challenge-philips-selecionar-default-rtdb.firebaseio.com/posts/" +
-              editedPost.id +
+            "https://challenge-philips-selecionar-default-rtdb.firebaseio.com/medications/" +
+              editedMedication.id +
               ".json?auth=" +
               vuexContext.state.token,
-            editedPost
+            editedMedication
           )
           .then(res => {
-            vuexContext.commit("editPost", editedPost);
+            vuexContext.commit("editMedication", editedMedication);
           })
           .catch(e => console.log(e));
       },
-      setPosts(vuexContext, posts) {
-        vuexContext.commit("setPosts", posts);
+      setMedications(vuexContext, medications) {
+        vuexContext.commit("setMedications", medications);
       },
       authenticateUser(vuexContext, authData) {
         let authUrl =
@@ -144,8 +144,8 @@ const createStore = () => {
       }
     },
     getters: {
-      loadedPosts(state) {
-        return state.loadedPosts;
+      loadedMedications(state) {
+        return state.loadedMedications;
       },
       isAuthenticated(state) {
         return state.token != null;

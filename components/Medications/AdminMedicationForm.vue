@@ -1,14 +1,14 @@
 <template>
   <form @submit.prevent="onSave">
-    <AppControlInput v-model="editedPost.author">Author Name</AppControlInput>
-    <AppControlInput v-model="editedPost.title">Title</AppControlInput>
-    <AppControlInput v-model="editedPost.thumbnail">Thumbnail Link</AppControlInput>
+    <AppControlInput v-model="editedMedication.author">Author Name</AppControlInput>
+    <AppControlInput v-model="editedMedication.title">Title</AppControlInput>
+    <AppControlInput v-model="editedMedication.thumbnail">Thumbnail Link</AppControlInput>
     <AppControlInput
       control-type="textarea"
-      v-model="editedPost.content">Content</AppControlInput>
+      v-model="editedMedication.content">Content</AppControlInput>
     <AppControlInput
       control-type="textarea"
-      v-model="editedPost.previewText">Preview Text</AppControlInput>
+      v-model="editedMedication.previewText">Preview Text</AppControlInput>
     <AppButton type="submit">Save</AppButton>
     <AppButton
       type="button"
@@ -21,15 +21,15 @@
 <script>
 export default {
   props: {
-    post: {
+    medication: {
       type: Object,
       required: false
     }
   },
   data() {
     return {
-      editedPost: this.post
-        ? { ...this.post }
+      editedMedication: this.medication
+        ? { ...this.medication }
         : {
             author: "",
             title: "",
@@ -41,12 +41,12 @@ export default {
   },
   methods: {
     onSave() {
-      // Save the post
-      this.$emit('submit', this.editedPost)
+      // Save the medication
+      this.$emit('submit', this.editedMedication)
     },
     onCancel() {
       // Navigate back
-      this.$router.push("/admin");
+      this.$router.push("/medications");
     }
   }
 };

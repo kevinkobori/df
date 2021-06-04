@@ -1,37 +1,37 @@
 <template>
-  <div class="admin-post-page">
+  <div class="admin-medication-page">
     <section class="update-form">
-      <AdminPostForm :post="loadedPost" @submit="onSubmitted" />
+      <AdminMedicationForm :medication="loadedMedication" @submit="onSubmitted" />
     </section>
   </div>
 </template>
 
 <script>
-import AdminPostForm from "@/components/Admin/AdminPostForm";
+import AdminMedicationForm from "@/components/Medications/AdminMedicationForm";
 
 export default {
-  layout: "admin",
+  // layout: "admin",
   middleware: ['check-auth', 'auth'],
   components: {
-    AdminPostForm
+    AdminMedicationForm
   },
   asyncData(context) {
     return context.app.$axios
       .$get(
-        process.env.baseUrl + "/posts/" +
-          context.params.postId +
+        process.env.baseUrl + "/medications/" +
+          context.params.medicationId +
           ".json"
       )
       .then(data => {
         return {
-          loadedPost: { ...data, id: context.params.postId }
+          loadedMedication: { ...data, id: context.params.medicationId }
         };
       })
       .catch(e => context.error());
   },
   methods: {
-    onSubmitted(editedPost) {
-      this.$store.dispatch("editPost", editedPost).then(() => {
+    onSubmitted(editedMedication) {
+      this.$store.dispatch("editMedication", editedMedication).then(() => {
         this.$router.push("/admin");
       });
     }

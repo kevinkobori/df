@@ -5,7 +5,7 @@
     class="sidenav-backdrop"
     @click="$emit('close')"></div>
   <transition name="slide-side">
-    <div
+    <!-- <div
       v-if="show"
       class="sidenav">
       <ul
@@ -13,9 +13,9 @@
         @click="$emit('close')">
         <li class="nav-item"><nuxt-link to="/posts">Blog</nuxt-link></li>
         <li class="nav-item"><nuxt-link to="/about">About</nuxt-link></li>
-        <li class="nav-item"><nuxt-link to="/admin">Admin</nuxt-link></li>
+        <li class="nav-item"><nuxt-link to="/medications">Admin</nuxt-link></li>
       </ul>
-    </div>
+    </div> -->
   </transition>
 </div>
 </template>

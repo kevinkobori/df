@@ -18,7 +18,6 @@
 <script>
 export default {
   name: "AdminAuthPage",
-  layout: "admin",
   data() {
     return {
       isLogin: true,
@@ -34,7 +33,7 @@ export default {
         password: this.password
       })
       .then(() => {
-        this.$router.push('/admin');
+        this.$router.push('/medications');
       });
     }
   }
